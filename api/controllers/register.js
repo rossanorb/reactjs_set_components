@@ -5,7 +5,7 @@ const url = "mongodb://localhost:27017/";
 exports.register = (request, response) => {
     MongoClient.connect(url, async function (err, db) {
         if (err) throw err;
-        const dbo = db.db("mydatabase");
+        const dbo = db.db("test");
         await dbo.collection("users").insertOne(request.body, function (err, res) {
             if (err) throw err;
             console.log("1 document inserted " + res.insertedId);
