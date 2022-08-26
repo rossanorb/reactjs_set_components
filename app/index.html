@@ -11,13 +11,14 @@
         submitForm = () => {
             const form = {
                 name: "",
+                login: "",
                 email: ""
             };
 
             form.name  = document.querySelector('#name').value;
+            form.login  = document.querySelector('#login').value;
             form.email  = document.querySelector('#email').value;
-            form.login  = document.querySelector('#login').value;            
-            
+
             fetch("http://localhost:4000/register",{
                 method:'POST',
                 headers: {
@@ -45,7 +46,7 @@
         window.onload = () => {
             init();
         }
-        
+
     </script>
 </head>
 <body>
@@ -58,7 +59,7 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" value="">
-                        </div>                   
+                        </div>
                     </div>
                     <div class="col-sm-12 col-lg-4">
                         <div class="form-group">
@@ -70,11 +71,11 @@
                         <div class="form-group">
                             <label for="email">Email address</label>
                             <input type="email" class="form-control" id="email" value="">
-                        </div>                
+                        </div>
                     </div>
                     <div class="col-sm-12">
                         <button type="button" id="submit" class="btn btn-primary">Submit</button>
-                    </div>                    
+                    </div>
                 </div>
             </form>
         </div>

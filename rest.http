@@ -1,0 +1,12 @@
+@hostname = localhost:4000
+
+
+###
+POST http://{{hostname}}/register
+Content-Type: application/json
+
+{
+    "name": "Lauren",
+    "login": "lauren",
+    "email": "lauren@email.com"
+}
