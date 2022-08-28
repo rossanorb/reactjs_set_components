@@ -10,3 +10,8 @@ Content-Type: application/json
     "login": "lauren",
     "email": "lauren@email.com"
 }
+
+###
+
+GET http://{{hostname}}/register/registers?page=3&limit=3
+Content-Type: application/json
