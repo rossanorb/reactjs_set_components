@@ -22,3 +22,9 @@ code {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+
+.page-link a {
+  cursor: pointer;
+  color: aquamarine;
+}

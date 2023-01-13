@@ -1,7 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 import Dashboard from "./views/dashboard";
 import Login from "./views/login"
-import Users from "./views/users"
+import Register from "./views/register"
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Login />
         </Route>
         <Route exact path="/users">
-          <Users />
+          <Register />
         </Route>
       </Switch>
     </div>
