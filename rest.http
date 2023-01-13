@@ -13,5 +13,5 @@ Content-Type: application/json
 
 ###
 
-GET http://{{hostname}}/register/registers?page=3&limit=3
+GET http://{{hostname}}/register?page=1&limit=10&sort=name&asc
 Content-Type: application/json
