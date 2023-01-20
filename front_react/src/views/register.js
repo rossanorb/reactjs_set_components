@@ -8,6 +8,7 @@ const Register = () => {
 
     const [page, setPage] = useState(1)
     const [sort, setSort] = useState("name&asc");
+    const [limit, setLimit] = useState(10);
     const [paginate, setPaginate] = useState({})
     const [items, setItems] = useState([])
     const [table] = useState({
@@ -31,16 +32,21 @@ const Register = () => {
     })
 
     useEffect(() => {        
-        Api.List(`page=${page}&sort=${sort}&limit=3`).then(users => {
+        Api.List(`page=${page}&sort=${sort}&limit=${limit}`).then(users => {
             if(users.status) {
                 setPaginate(users.paginate)
                 setItems(users.data)
             }
         })
-    }, [page,sort])
+    }, [page,sort,limit])
 
     const updatePage = (current_page) => {
         setPage(current_page)
+    };
+
+    const chageLimit = (limit) => {
+        setLimit(limit)
+        setPage(1)
     };
 
     const orderList = (sortColunm) => {
@@ -57,6 +63,7 @@ const Register = () => {
                     paginate={paginate}
                     updatePage={updatePage}
                     order={orderList}
+                    chageLimit={chageLimit}
                 />
             </div>
         </div >

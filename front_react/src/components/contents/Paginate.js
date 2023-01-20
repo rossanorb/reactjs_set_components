@@ -1,4 +1,4 @@
-const Paginate = ({ paginate, parentPage }) => {
+const Paginate = ({ paginate, parentPage, perPage }) => {
 
     const goToPage = (event) => {
         event.preventDefault();
@@ -26,26 +26,43 @@ const Paginate = ({ paginate, parentPage }) => {
         event.preventDefault();
         let page = paginate.current_page - 1;
         if (page < 1) page = 1;
-        console.log(`set page to ${page}`)
         parentPage(page)
     }
 
     return (
-        <nav>
-            <ul className="pagination justify-content-center">
-                <li className={paginate.current_page === 1 ? 'page-item disabled' : 'page-item'} >
-                    <a className="page-link" href="/" onClick={previous} aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                </li>
-                {links()}
-                <li className={paginate.current_page === paginate.last_page ? 'page-item disabled' : 'page-item'}>
-                    <a className="page-link" href="/" onClick={next} aria-label="Next">
-                        <span aria-hidden="true">&gt;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div className="row">
+            <div className="col-sm-12 col-md-4">
+                <div style={{display:'flex', flexFlow:"row nowrap"}}>
+                    <div>show</div>
+                    <div style={{marginLeft:10, marginRight:10}}>
+                        <select onChange={(e) => perPage(e.target.value)} className="custom-select custom-select-sm form-control form-control-sm">
+                                <option>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>                        
+                    </div>
+                    <div>per page</div>                    
+                </div>
+            </div>
+            <div className="col-sm-12 col-md-8">
+                <nav>
+                    <ul className="pagination justify-content-center">
+                        <li className={paginate.current_page === 1 ? 'page-item disabled' : 'page-item'} >
+                            <a className="page-link" href="/" onClick={previous} aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                        {links()}
+                        <li className={paginate.current_page === paginate.last_page ? 'page-item disabled' : 'page-item'}>
+                            <a className="page-link" href="/" onClick={next} aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     )
 }
 
