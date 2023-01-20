@@ -8,17 +8,13 @@ const Table = (props) => {
         table,
         items,
         paginate,
-        updatePage,
         order,
+        changePage,
         chageLimit
     } = props;
 
 
     const elementsRef = {};
-
-    const changePage = (page) => {
-        updatePage(page)
-    }
 
     let sort = (param) => {
         elementsRef[param.mapping].current.updateStatus()

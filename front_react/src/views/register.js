@@ -40,7 +40,7 @@ const Register = () => {
         })
     }, [page,sort,limit])
 
-    const updatePage = (current_page) => {
+    const changePage = (current_page) => {
         setPage(current_page)
     };
 
@@ -61,7 +61,7 @@ const Register = () => {
                     table={table}
                     items={items}
                     paginate={paginate}
-                    updatePage={updatePage}
+                    changePage={changePage}
                     order={orderList}
                     chageLimit={chageLimit}
                 />
