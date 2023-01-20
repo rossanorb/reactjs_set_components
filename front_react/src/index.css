@@ -28,3 +28,7 @@ code {
   cursor: pointer;
   color: aquamarine;
 }
+
+table tr th.sort-column {
+  cursor: pointer;
+}

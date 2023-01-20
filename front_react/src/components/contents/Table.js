@@ -16,11 +16,13 @@ const Table = (props) => {
 
     const elementsRef = {};
 
-    let sort = (param) => {
-        elementsRef[param.mapping].current.updateStatus()
-        let orderDirection = elementsRef[param.mapping].current.getOrderDirection()
+    let sort = (column) => {
+        if(!column.sort) return ""
+
+        elementsRef[column.mapping].current.updateStatus()
+        let orderDirection = elementsRef[column.mapping].current.getOrderDirection()
         
-        order(`${param.mapping}&${orderDirection}`)
+        order(`${column.mapping}&${orderDirection}`)
     }
 
     const caret = (column) => {
@@ -32,12 +34,12 @@ const Table = (props) => {
         <div className="mt-5">
 
             <table className="table">
-                <thead className="thead-light">
+                <thead>
                     <tr>
                         {
                             table.columns.map(column => (
-                                <th onClick={() => { sort(column) }} key={column.name}>{column.name}
-                                    {caret(column)}
+                                <th className={column.sort ? "sort-column":""} onClick={() => { sort(column) }} key={column.name}>{column.name}
+                                    { column.sort ? caret(column) : ""}
                                 </th>
                             ))
                         }

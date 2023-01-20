@@ -16,17 +16,17 @@ const Register = () => {
             {
                 name: 'Name',
                 mapping: 'name',
-                sort: false
+                sort: true
             },
             {
                 name: 'Login',
                 mapping: 'login',
-                sort: false
+                sort: true
             },
             {
                 name: 'E-mail',
                 mapping: 'email',
-                sort: true
+                sort: false
             }
         ]
     })
