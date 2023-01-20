@@ -20,10 +20,6 @@ const Table = (props) => {
         updatePage(page)
     }
 
-    let limit = (limit) => {
-        chageLimit(limit)
-    }
-
     let sort = (param) => {
         elementsRef[param.mapping].current.updateStatus()
         let orderDirection = elementsRef[param.mapping].current.getOrderDirection()
@@ -64,7 +60,7 @@ const Table = (props) => {
             <Paginate
                 paginate={paginate}
                 parentPage={changePage}
-                perPage={limit}
+                perPage={chageLimit}
             />
         </div >
 
