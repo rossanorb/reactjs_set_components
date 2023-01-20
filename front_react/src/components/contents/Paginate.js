@@ -40,7 +40,7 @@ const Paginate = ({ paginate, parentPage, perPage }) => {
                                 <option>25</option>
                                 <option>50</option>
                                 <option>100</option>
-                            </select>                        
+                        </select>                        
                     </div>
                     <div>per page</div>                    
                 </div>
