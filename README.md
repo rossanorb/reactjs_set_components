@@ -56,4 +56,6 @@ $ sudo docker run -d --name mongodb -p 27017:27017 -v /YOUR_LOCAL_FOLDER_HERE:/d
 >>  }
 >><pre>
 
-#### front/src/views/register.js
+#### see the file front/src/views/register.js
+
+#### The database can be populated via app/index.html
