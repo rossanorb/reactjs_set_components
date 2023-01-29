@@ -1,4 +1,4 @@
-!.gitignore
-!README.md
-!front
+.gitignore
+README.md
+ront
 *.gz
