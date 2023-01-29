@@ -32,3 +32,8 @@ code {
 table tr th.sort-column {
   cursor: pointer;
 }
+
+.container table td .btn-delete {
+  color:red;
+  cursor: pointer;
+}

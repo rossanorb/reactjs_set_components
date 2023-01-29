@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import NavBar from '../components/contents/NavBar'
 import Table from '../components/contents/Table'
 import Api from '../api/Api'
-
+import dataTable from  './../views/data/register/table'
 
 const Register = () => {
 
@@ -11,27 +11,10 @@ const Register = () => {
     const [limit, setLimit] = useState(10);
     const [paginate, setPaginate] = useState({})
     const [items, setItems] = useState([])
-    const [table] = useState({
-        columns: [
-            {
-                name: 'Name',
-                mapping: 'name',
-                sort: true
-            },
-            {
-                name: 'Login',
-                mapping: 'login',
-                sort: true
-            },
-            {
-                name: 'E-mail',
-                mapping: 'email',
-                sort: false
-            }
-        ]
-    })
+    const [table] = useState(dataTable)
+    const [id, setId] = useState("")
 
-    useEffect(() => {        
+    useEffect(() => {
         Api.List(`page=${page}&sort=${sort}&limit=${limit}`).then(users => {
             if(users.status) {
                 setPaginate(users.paginate)
@@ -53,17 +36,28 @@ const Register = () => {
         setSort(sortColunm)
     };
 
+    const confirmDelete = (id) =>{
+        setId(id)
+    }
+
+    const parameters = {
+        table,
+        items,
+        paginate,
+        changePage,
+        order:orderList,
+        chageLimit,
+        functions: {
+            confirmDelete
+        }
+    }
+
     return (
         <div>
             <NavBar />
             <div className="container">
                 <Table
-                    table={table}
-                    items={items}
-                    paginate={paginate}
-                    changePage={changePage}
-                    order={orderList}
-                    chageLimit={chageLimit}
+                    {...parameters}
                 />
             </div>
         </div >

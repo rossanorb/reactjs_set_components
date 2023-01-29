@@ -30,19 +30,49 @@ const Table = (props) => {
         return <CaretIcon ref={elementsRef[column.mapping]} />
     }
 
+    function showAction(type, props = null, item = {}){
+        let show = false;
+        let { table } = props;        
+        
+        if(!!table.actions && table.actions.length ){
+            show = true;
+        }
+
+        const Actions = ({Component, functions}) => {
+            return (<Component {...item} {...functions } />)
+        }
+    
+        if(show){
+            if(type === 'th'){
+                return <th>Actions</th>
+            }
+        
+            if(type === 'td'){
+                return (
+                    <td >
+                        {table.actions.map(elem => (
+                            <Actions Component={elem} {...props} key={elem} />
+                        ))}
+                    </td>
+                )
+            }
+        }    
+    
+        return null;
+    }  
+
     return (
         <div className="mt-5">
 
             <table className="table">
                 <thead>
                     <tr>
-                        {
-                            table.columns.map(column => (
+                        {table.columns.map(column => (
                                 <th className={column.sort ? "sort-column":""} onClick={() => { sort(column) }} key={column.name}>{column.name}
                                     { column.sort ? caret(column) : ""}
                                 </th>
-                            ))
-                        }
+                        ))}
+                        {showAction('th', props)}
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +81,7 @@ const Table = (props) => {
                             {table.columns.map(column => (
                                 <td key={column.name} > {item[column.mapping]} </td>
                             ))}
+                            {showAction('td', props, item)}
                         </tr>
                     ))}
                 </tbody>
