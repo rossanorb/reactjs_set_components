@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import NavBar from '../components/contents/NavBar'
 import Table from '../components/contents/Table'
 import Api from '../api/Api'
 import dataTable from  './../views/data/register/table'
+import Dialog from '../components/Dialog'
 
 const Register = () => {
 
@@ -13,6 +14,7 @@ const Register = () => {
     const [items, setItems] = useState([])
     const [table] = useState(dataTable)
     const [id, setId] = useState("")
+    const dialog = useRef();
 
     useEffect(() => {
         Api.List(`page=${page}&sort=${sort}&limit=${limit}`).then(users => {
@@ -38,6 +40,14 @@ const Register = () => {
 
     const confirmDelete = (id) =>{
         setId(id)
+        dialog.current.show({
+            title: "Delete User",
+            message: "Are you sure you want to delete this user?"
+        })        
+    }
+
+    const remove = async () => {
+        console.log(`Delete ${id}`)
     }
 
     const parameters = {
@@ -54,6 +64,7 @@ const Register = () => {
 
     return (
         <div>
+            <Dialog ref={dialog} method={remove} />
             <NavBar />
             <div className="container">
                 <Table
