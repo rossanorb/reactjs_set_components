@@ -34,8 +34,11 @@ $ sudo docker run -d --name mongodb -p 27017:27017 -v /YOUR_LOCAL_FOLDER_HERE:/d
 >>- name: Name the column
 >>- mapping: data key reference
 >>- sort: active ordering by this column or not
->><pre>
+>> <pre>
+>>  import BtnDelete from "../../../components/buttons/BtnDelete"
+>>
 >>  {
+>>        actions: [BtnDelete],
 >>        columns: [
 >>            {
 >>                name: 'Name',
@@ -54,7 +57,22 @@ $ sudo docker run -d --name mongodb -p 27017:27017 -v /YOUR_LOCAL_FOLDER_HERE:/d
 >>            }
 >>        ]
 >>  }
->><pre>
+>>
+>> </pre>
+
+
+<pre>   
+Declare de method in the parent component, same declared inside child component
+Example: BtnDelete
+    
+const confirmDelete = (id) =>{
+    setId(id)
+    dialog.current.show({
+        title: "Delete User",
+        message: "Are you sure you want to delete this user?"
+    })        
+}
+</pre>    
 
 #### see the file front/src/views/register.js
 
