@@ -15,3 +15,9 @@ Content-Type: application/json
 
 GET http://{{hostname}}/register?page=1&limit=10&sort=name&asc
 Content-Type: application/json
+
+
+
+###
+DELETE  http://{{hostname}}/register/63d7e86abbedaf525f09d2eb
+Content-Type: application/json

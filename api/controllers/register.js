@@ -1,9 +1,10 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const url = "mongodb://localhost:27017/";
 
 
 exports.register = (request, response) => {
-    MongoClient.connect(url, async function (err, db) {
+    MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true}, async function (err, db) {
         if (err) throw err;
         const dbo = db.db("test");
         await dbo.collection("users").insertOne(request.body, function (err, res) {
@@ -27,13 +28,32 @@ exports.show = (request, response) => {
     })
 }
 
+exports.delete = (request, response) => {
+    let statusCode = 400;
+
+    MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true}, async function(err, db){
+        if(err) throw err;
+        const dbo = db.db("test");
+        const queryResult = await dbo.collection("users").deleteOne({_id: ObjectID(request.params.id)})
+        db.close();
+
+        if(!!queryResult.deletedCount){
+            statusCode = 204         
+        }
+
+        await response.status(statusCode).json({
+            body: {message: "Failed to delete" }
+        })        
+    })
+}
+
 exports.all = async (request, response) => {
     const perPage = parseInt(request.query.limit * 1) > 1 ? parseInt(request.query.limit * 1) : 10;
     let pageNumber = parseInt((request.query.page * 1) > 0 ? (request.query.page - 1) : 0);
     const sort = request.query.sort ? request.query.sort : '_id';
     const ascending = request.query.hasOwnProperty('desc') ? -1 : 1;
 
-    const db = await MongoClient.connect(url);
+    const db = await MongoClient.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true});
     const dbo = db.db("test");
     const total = await dbo.collection('users').countDocuments()
     const pages = Math.ceil(total / perPage)
