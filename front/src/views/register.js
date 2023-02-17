@@ -7,6 +7,7 @@ import Dialog from '../components/Dialog'
 
 const Register = () => {
 
+    const [refresh, setRefresh] = useState(0)
     const [page, setPage] = useState(1)
     const [sort, setSort] = useState("name&asc");
     const [limit, setLimit] = useState(10);
@@ -23,7 +24,7 @@ const Register = () => {
                 setItems(users.data)
             }
         })
-    }, [page,sort,limit])
+    }, [page,sort,limit,refresh])
 
     const changePage = (current_page) => {
         setPage(current_page)
@@ -47,7 +48,11 @@ const Register = () => {
     }
 
     const remove = async () => {
-        console.log(`Delete ${id}`)
+        const httpReponse = await Api.delete(id);
+
+        if(httpReponse.status) {
+            await setRefresh(refresh + 1)
+        }        
     }
 
     const parameters = {

@@ -23,9 +23,9 @@ const Dialog = forwardRef((props, ref) => {
     }     
 
     return (
-        <div id="dialog" onClick={cancel} style={{
+        <div onClick={cancel} style={{
             display:  visible ? "block" : "none"
-        }} className="component-dialog modal" tabIndex="-1">
+        }} className="component-dialog modal">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">

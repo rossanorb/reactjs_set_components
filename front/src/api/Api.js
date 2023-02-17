@@ -24,6 +24,23 @@ const Api = {
                 };
             });
 
+    },
+
+    async delete(id) {
+        return await axios.delete(`http://localhost:4000/${endpoint}/${id}`)
+            .then((response) => {
+                return {
+                    status: true,
+                    data: response.data.body,
+                };
+            })
+            .catch(err => {
+                return {
+                    status: false,
+                    error: err.message,
+                    description: err.response.data.message
+                };
+            });
     }
 }
 
