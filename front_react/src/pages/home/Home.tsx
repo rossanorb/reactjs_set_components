@@ -1,26 +1,15 @@
 // Commented out import and hook to fix the missing module error.
-import { useEffect, useState } from 'react';
-import useFetch from '../../hooks/useFetch';
+import { useEffect } from 'react';
+import useUsers from '../../hooks/useUser';
 
 const Home = () => {
-    const [url, setUrl] = useState('http://localhost:4000/register');
-    const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10);
-    const [sort, setSort] = useState('name&asc');
-    const { data, loading, error } = useFetch(url);
-
-    useEffect(() => {
-        console.log(page, limit, sort);
-        setUrl(
-            `http://localhost:4000/register?page=${page}&limit=${limit}&sort=${sort}`
-        );
-        console.log(url);
-    }, [page, limit, sort]);
+    const { data, setPage } = useUsers();
 
     useEffect(() => {
         console.log(data);
         const timer = setTimeout(() => {
-            setPage(2);
+            console.log('has changed to 2');
+            setPage(2); // Toggle to force state change
         }, 5000);
         return () => clearTimeout(timer);
     }, [data]);
