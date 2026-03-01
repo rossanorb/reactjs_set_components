@@ -7,12 +7,27 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 const url = process.env.API_URL || 'http://localhost';
+const frontendUrl = process.env.FRONTEND_URL;
 
 app.use(
-  cors({
-    origin: `${url}:${port}`,
-  })
-);
+    cors({
+      origin: function (origin, callback) {        
+        // list of origin allowed
+        const allowedOrigins = [
+            frontendUrl,
+        ];
+
+        if (allowedOrigins.indexOf(origin) === -1) {
+            callback(new Error('Not allowed by CORS').message);
+        }
+
+        callback(null, true);
+      },
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    })
+  );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
