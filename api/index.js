@@ -15,6 +15,7 @@ app.use(
         // list of origin allowed
         const allowedOrigins = [
             frontendUrl,
+            'http://localhost:3000'
         ];
 
         if (allowedOrigins.indexOf(origin) === -1) {
