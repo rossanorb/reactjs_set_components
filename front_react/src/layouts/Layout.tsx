@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { REACT_APP_BASE_URL } from '../configs';
 
 const Layout = () => {
     return (
@@ -12,7 +13,7 @@ const Layout = () => {
             <header className="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow">
                 <a
                     className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
-                    href={process.env.REACT_APP_BASE_URL || '/'}
+                    href={REACT_APP_BASE_URL || '/'}
                 >
                     Company name
                 </a>
