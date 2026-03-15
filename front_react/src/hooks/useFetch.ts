@@ -5,7 +5,7 @@ const useFetch = (url: string) => {
     const [items, setItems] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [pagination, setPagination] = useState<PaginationInfo | null>(null);
+    const [pagination, setPagination] = useState<PaginationInfo>({lastPage: 0, currentPage: 0, itemsPerPage: 0, totalPages: 0});
 
     useEffect(() => {
         const abortCont = new AbortController();

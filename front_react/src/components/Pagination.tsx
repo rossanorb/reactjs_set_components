@@ -6,10 +6,32 @@ export type PaginationInfo = {
 };
 
 interface PaginationProps {
-    pagination: PaginationInfo | null;
+    pagination: PaginationInfo;
+    changePage: (current_page: number) => void;
 }
 
-const Pagination = ({ pagination }: PaginationProps) => {
+const Pagination = ( props : PaginationProps) => {
+    const { pagination, changePage } = props;
+
+    const next = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        if (pagination.currentPage < pagination.lastPage) {
+            changePage(pagination.currentPage + 1);
+        }
+    }
+
+    const previous = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        if (pagination.currentPage > 1) {
+            changePage(pagination.currentPage - 1);
+        }
+    }
+
+    const goToPage = (event: React.MouseEvent<HTMLAnchorElement>, page: number) => {
+        event.preventDefault();
+        changePage(page);
+    }
+
     return (
         <div className="row">
             <div className="col-md-12">
@@ -31,11 +53,12 @@ const Pagination = ({ pagination }: PaginationProps) => {
                     <div className="col-sm-12 col-md-8">
                         <nav style={{ overflowX: 'auto' }}>
                             <ul className="pagination justify-content-start flex-wrap">
-                                <li className="page-item disabled">
+                                <li className={pagination.currentPage === 1 ? 'page-item disabled' : 'page-item'} >
                                     <a
                                         className="page-link"
-                                        href="/"
+                                        href={`page=${pagination.currentPage - 1}`}
                                         aria-label="Previous"
+                                        onClick={previous}
                                     >
                                         <span aria-hidden="true">&lt;</span>
                                     </a>
@@ -48,16 +71,18 @@ const Pagination = ({ pagination }: PaginationProps) => {
                                         <a
                                             className="page-link"
                                             href={`page=${i + 1}`}
+                                            onClick={(event) => goToPage(event, i + 1)}
                                         >
                                             {i + 1}
                                         </a>
                                     </li>
                                 ))}
-                                <li className="page-item">
+                                <li className={pagination.currentPage === pagination.lastPage ? 'page-item disabled' : 'page-item'} >
                                     <a
                                         className="page-link"
-                                        href="/"
+                                        href={`page=${pagination.currentPage + 1}`}
                                         aria-label="Next"
+                                        onClick={next}
                                     >
                                         <span aria-hidden="true">&gt;</span>
                                     </a>

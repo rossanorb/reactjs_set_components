@@ -2,8 +2,18 @@ import { Key } from 'react';
 import { TableColumn } from '../interfaces/TableColumn';
 import Pagination, { PaginationInfo } from './Pagination';
 
-const Table = (props: { table: any; items: any, pagination: PaginationInfo | null }) => {
-    const { table, items, pagination } = props;
+interface TableProps {
+    table: {
+        actions: any[];
+        columns: TableColumn[];
+    };
+    items: any[];
+    pagination: PaginationInfo;
+    changePage: (current_page: number) => void;
+}
+
+const Table = (props: TableProps) => {
+    const { table, items, pagination, changePage } = props;
 
     return (
         <>
@@ -41,7 +51,7 @@ const Table = (props: { table: any; items: any, pagination: PaginationInfo | nul
                     </table>
                 </div>
             </div>
-            <Pagination pagination={pagination}  />
+            <Pagination pagination={pagination} changePage={changePage} />
         </>
     );
 };

@@ -8,12 +8,12 @@ const Home = () => {
 
     useEffect(() => {
         console.log(items);
-        const timer = setTimeout(() => {
-            console.log('has changed to 2');
-            changePage(2); // Toggle to force state change
-        }, 5000);
-        return () => clearTimeout(timer);
-    }, [items, changePage]);
+        // const timer = setTimeout(() => {
+        //     console.log('has changed to 2');
+        //     changePage(2); // Toggle to force state change
+        // }, 5000);
+        // return () => clearTimeout(timer);
+    }, []);
 
     const parameters = {
         table,
