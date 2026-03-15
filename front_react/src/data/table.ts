@@ -1,8 +1,8 @@
-import { ITableColumn } from '../interfaces/ITableColumn';
+import { TableColumn } from '../interfaces/TableColumn';
 
 const table: {
     actions: any[];
-    columns: ITableColumn[];
+    columns: TableColumn[];
 } = {
     actions: [],
     columns: [

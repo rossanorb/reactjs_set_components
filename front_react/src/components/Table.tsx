@@ -1,31 +1,47 @@
 import { Key } from 'react';
-import { ITableColumn } from '../interfaces/ITableColumn';
+import { TableColumn } from '../interfaces/TableColumn';
+import Pagination, { PaginationInfo } from './Pagination';
 
-const Table = (props: { table: any; items: any }) => {
-    const { table, items } = props;
+const Table = (props: { table: any; items: any, pagination: PaginationInfo | null }) => {
+    const { table, items, pagination } = props;
 
     return (
         <>
-            <table className="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        {table.columns.map((column: { name: string }) => (
-                            <th key={column.name as Key}>{column.name}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.map((item: { _id: Key }) => (
-                        <tr key={item._id}>
-                            {table.columns.map((column: ITableColumn) => (
-                                <td key={column.name}>
-                                    {item[column.mapping as keyof typeof item]}
-                                </td>
+            <div className="table-responsive small">
+                <div className="table-responsive">
+                    <table className="table table-striped table-hover border">
+                        <thead>
+                            <tr>
+                                {table.columns.map(
+                                    (column: { name: string }) => (
+                                        <th key={column.name as Key}>
+                                            {column.name}
+                                        </th>
+                                    )
+                                )}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map((item: { _id: Key }) => (
+                                <tr key={item._id}>
+                                    {table.columns.map(
+                                        (column: TableColumn) => (
+                                            <td key={column.name}>
+                                                {
+                                                    item[
+                                                        column.mapping as keyof typeof item
+                                                    ]
+                                                }
+                                            </td>
+                                        )
+                                    )}
+                                </tr>
                             ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <Pagination pagination={pagination}  />
         </>
     );
 };

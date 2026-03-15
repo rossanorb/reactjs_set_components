@@ -38,7 +38,14 @@
   "prettier.requireConfig": false,
   "prettier.useEditorConfig": false,
   "prettier.enable": true,
-  
+
+  // ESLint settings
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
   // Auto-save configuration
   "files.autoSave": "onFocusChange"
 }

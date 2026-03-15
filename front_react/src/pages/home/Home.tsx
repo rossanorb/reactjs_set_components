@@ -4,16 +4,23 @@ import useUsers from '../../hooks/useUser';
 import Table from '../../components/Table';
 
 const Home = () => {
-    const { data, table, changePage } = useUsers();
+    const { items, table, changePage, pagination } = useUsers();
 
     useEffect(() => {
-        console.log(data);
+        console.log(items);
         const timer = setTimeout(() => {
             console.log('has changed to 2');
             changePage(2); // Toggle to force state change
         }, 5000);
         return () => clearTimeout(timer);
-    }, [data, changePage]);
+    }, [items, changePage]);
+
+    const parameters = {
+        table,
+        items,
+        changePage,
+        pagination
+    };
 
     return (
         <>
@@ -37,9 +44,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="table-responsive small">
-                <Table table={table} items={data} />
-            </div>
+            <Table {...parameters} />
         </>
     );
 };
