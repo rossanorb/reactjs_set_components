@@ -90,6 +90,9 @@ exports.all = async (request, response) => {
     .collection('users')
     .find({})
     .sort(mongoSort)
+    .collation({
+      locale: 'simple',
+    })
     .skip(startFrom)
     .limit(perPage)
     .toArray();
